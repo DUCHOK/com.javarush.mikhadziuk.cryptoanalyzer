@@ -1,30 +1,33 @@
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Приветствую, пользователь!");
-        int number = menu();
-        while(number < 1 || number > 4){
-            System.out.println("Номер функции введён некорректно, попробуйте ввести его заново.");
-            number = menu();
-        }
-        choice(number);
-
+        choose(menu());
     }
+
+
     public static int menu() {
         Scanner console = new Scanner(System.in);
-        System.out.println("Введите номер действия, которое вы хотите выполнить.");
-        System.out.println("1 - Зашифровать текст по ключу.\n" +
+        System.out.println("Введите номер действия, которое вы хотите выполнить.\n" +
+                "1 - Зашифровать текст по ключу.\n" +
                 "2 - Расшифровать текст по ключу.\n" +
                 "3 - Расшифровать текст перебором(Brute force).\n" +
                 "4 - Завершение работы программы.");
-        String n = console.nextLine();
-        int number = Integer.parseInt(n);
+        int number = Integer.parseInt(console.nextLine());
+        while(number < 1 || number > 4){
+            System.out.println("Номер функции введён некорректно, попробуйте ввести его заново.");
+            number = Integer.parseInt(console.nextLine());
+        }
         return number;
     }
-    public static void choice(int number){
+    public static void choose(int number){
         if (number == 1) {
             //Encrypt
+            Encrypt encrypt = new Encrypt();
+            System.out.println(encrypt.encryptFile());
+
         }else if(number == 2){
             //Decrypt
         }else if(number == 3){
