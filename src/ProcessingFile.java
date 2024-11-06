@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class EncryptOrDecrypt{
+public class ProcessingFile {
     static Scanner console = new Scanner(System.in);
     static Path pathToFileToEncrypt;
     String textToEncrypt;
@@ -13,7 +13,7 @@ public class EncryptOrDecrypt{
     String textToDecrypt;
 
     public Path encryptFile(){
-        EncryptOrDecrypt encrypt = new EncryptOrDecrypt();
+        ProcessingFile encrypt = new ProcessingFile();
         pathToFileToEncrypt = encrypt.getPath();
         textToEncrypt = encrypt.readFile(pathToFileToEncrypt);
         encrypt.setKey();
@@ -22,7 +22,7 @@ public class EncryptOrDecrypt{
         return encrypt.createProcessedFile(encryptedString);
     }
     public Path decryptFile(){
-        EncryptOrDecrypt encrypt = new EncryptOrDecrypt();
+        ProcessingFile encrypt = new ProcessingFile();
         pathToFileToDecrypt = encrypt.getPath();
         textToDecrypt = encrypt.readFile(pathToFileToDecrypt);
         encrypt.setKey();

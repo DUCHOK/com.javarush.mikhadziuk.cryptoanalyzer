@@ -25,12 +25,12 @@ public class Main {
     public static void choose(int number){
         if (number == 1) {
             //Encrypt
-            EncryptOrDecrypt encrypt = new EncryptOrDecrypt();
+            ProcessingFile encrypt = new ProcessingFile();
             System.out.println("Путь к зашифрованному файлу: " + encrypt.encryptFile());
 
         }else if(number == 2){
             //Decrypt
-            EncryptOrDecrypt decrypt = new EncryptOrDecrypt();
+            ProcessingFile decrypt = new ProcessingFile();
             System.out.println("Путь к расшифрованному файлу: " + decrypt.decryptFile());
         }else if(number == 3){
             //Brute force
