@@ -23,12 +23,12 @@ public class Alphabet {
         }
         return map;
     }
-    public static Map<Character, Character> invertMap(Map<Character, Character> mapToInvert){
+    public static void invertMap(Map<Character, Character> mapToInvert){
         Map<Character, Character> invertedMap = new HashMap<>();
         for(char mapKey : mapToInvert.keySet()){
             invertedMap.put(mapToInvert.get(mapKey), mapKey);
         }
-        return invertedMap;
+        Alphabet.cryptMap = invertedMap;
     }
 
     public static void setKey(int key){

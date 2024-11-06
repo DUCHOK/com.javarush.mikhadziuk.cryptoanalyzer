@@ -26,14 +26,18 @@ public class Main {
         if (number == 1) {
             //Encrypt
             ProcessingFile encrypt = new ProcessingFile();
-            System.out.println("Путь к зашифрованному файлу: " + encrypt.encryptFile());
-
+            System.out.println("Путь к зашифрованному файлу: "
+                    + encrypt.encryptFile() + "\n" + "До новых встреч!");
         }else if(number == 2){
             //Decrypt
             ProcessingFile decrypt = new ProcessingFile();
-            System.out.println("Путь к расшифрованному файлу: " + decrypt.decryptFile());
+            System.out.println("Путь к расшифрованному файлу: "
+                    + decrypt.decryptFile() + "\n" + "До новых встреч!");
         }else if(number == 3){
             //Brute force
+            ProcessingFile bruteForce = new ProcessingFile();
+            System.out.println("Путь к файлу, содержащему все варианты расшифровок соответственно ключам:\n"
+                               + bruteForce.bruteForce() + "\n" + "До новых встреч!");
         }else if(number == 4){
             System.out.println("До новых встреч!");
         }

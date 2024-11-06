@@ -7,33 +7,53 @@ import java.util.Scanner;
 
 public class ProcessingFile {
     static Scanner console = new Scanner(System.in);
-    static Path pathToFileToEncrypt;
-    String textToEncrypt;
-    static Path pathToFileToDecrypt;
-    String textToDecrypt;
+    static ProcessingFile processing = new ProcessingFile();
+    static Path pathToProcessingFile;
+    static String processingText;
+    static String processedText;
 
     public Path encryptFile(){
-        ProcessingFile encrypt = new ProcessingFile();
-        pathToFileToEncrypt = encrypt.getPath();
-        textToEncrypt = encrypt.readFile(pathToFileToEncrypt);
-        encrypt.setKey();
-        encrypt.createCodeMap();
-        String encryptedString = encrypt.textProcessing(textToEncrypt);
-        return encrypt.createProcessedFile(encryptedString);
+        pathToProcessingFile = processing.getPath();
+        processingText = processing.readFile(pathToProcessingFile);
+        processing.setKey();
+        processing.createCodeMap();
+        processedText = processing.textProcessing(processingText);
+        return processing.createProcessedFile(processedText);
     }
     public Path decryptFile(){
-        ProcessingFile encrypt = new ProcessingFile();
-        pathToFileToDecrypt = encrypt.getPath();
-        textToDecrypt = encrypt.readFile(pathToFileToDecrypt);
-        encrypt.setKey();
-        encrypt.createCodeMap();
-        Alphabet.cryptMap = Alphabet.invertMap(Alphabet.cryptMap);
-        String decryptedString = encrypt.textProcessing(textToDecrypt);
-        return encrypt.createProcessedFile(decryptedString);
+        pathToProcessingFile = processing.getPath();
+        processingText = processing.readFile(pathToProcessingFile);
+        processing.setKey();
+        processing.createCodeMap();
+        Alphabet.invertMap(Alphabet.cryptMap);
+        processedText = processing.textProcessing(processingText);
+        return processing.createProcessedFile(processedText);
+    }
+    public Path bruteForce(){
+        pathToProcessingFile = processing.getPath();
+        processingText = processing.createTextToBruteForced(processing.readFile(pathToProcessingFile));
+        processedText = processing.createBruteForcedText(processingText);
+        return processing.createProcessedFile(processedText);
     }
 
+    public String createBruteForcedText(String substring){
+        String bruteForcedText ="";
+        for(int i = 1; i < 78; i++){
+            Alphabet.setKey(i);
+            processing.createCodeMap();
+            Alphabet.invertMap(Alphabet.cryptMap);
+            bruteForcedText = bruteForcedText + "При ключе - " + Alphabet.getKey()+ " Расшифровка:" + processing.textProcessing(substring) + "\n";
+        }
+        return bruteForcedText;
+    }
+    public String createTextToBruteForced(@NotNull String textToBruteForce){
+        String substring = textToBruteForce.trim();
+        if(substring.length() > 40){
+            substring = substring.substring(0, 40);
+        }return substring;
+    }
     public Path createProcessedFile(String processedString){
-        System.out.println("Введите путь для создания обработанного файла.");
+        System.out.println("Введите путь для создания файла.");
         Path pathToProcessedFile = Path.of(console.nextLine());
         try {
             Files.createFile(pathToProcessedFile);
@@ -41,7 +61,6 @@ public class ProcessingFile {
         }catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println("Содержимое обработанного файла: " + processedString);
         return pathToProcessedFile;
     }
     public String textProcessing(@NotNull String textToProcessing){
